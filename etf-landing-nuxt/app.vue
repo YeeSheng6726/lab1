@@ -421,6 +421,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import type { Registration } from '~/composables/useSupabase'
 
 // Head configuration
 useHead({
@@ -695,8 +696,32 @@ const submitForm = async () => {
   
   submitting.value = true
   
-  // Simulate API call
-  setTimeout(() => {
+  try {
+    const { supabase } = useSupabase()
+    
+    // Prepare data for Supabase
+    const registrationData: Registration = {
+      first_name: form.value.firstName,
+      last_name: form.value.lastName,
+      email: form.value.email,
+      phone: form.value.phone,
+      experience: form.value.experience,
+      goals: form.value.goals || null
+    }
+    
+    // Insert into Supabase
+    const { data, error } = await supabase
+      .from('registrations')
+      .insert([registrationData])
+      .select()
+    
+    if (error) {
+      console.error('Supabase error:', error)
+      showNotification('Registration failed. Please try again.', 'error')
+      return
+    }
+    
+    console.log('Registration saved:', data)
     showNotification('Registration successful! You will receive a confirmation email shortly.', 'success')
     
     // Reset form
@@ -704,9 +729,12 @@ const submitForm = async () => {
       form.value[key] = ''
     })
     
+  } catch (error) {
+    console.error('Submission error:', error)
+    showNotification('Registration failed. Please try again.', 'error')
+  } finally {
     submitting.value = false
-    console.log('Form submitted:', form.value)
-  }, 2000)
+  }
 }
 
 const showNotification = (message, type = 'info') => {
