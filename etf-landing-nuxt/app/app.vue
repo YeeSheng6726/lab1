@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="hero-cta">
-          <a href="#register" class="btn-primary" @click="scrollToSection('register')">Secure Your Spot - $497</a>
+          <a href="#register" class="btn-primary" @click="scrollToSection('register')">Secure Your Spot - RM1,099</a>
           <p class="guarantee">30-Day Money Back Guarantee</p>
         </div>
       </div>
@@ -491,7 +491,7 @@ const classDetails = [
   {
     icon: 'fas fa-dollar-sign',
     title: 'Investment',
-    content: '<p><strong>$497 per person</strong></p><p class="price-includes" style="color: #d4af37; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem;">Includes:</p>',
+    content: '<p><strong>RM1,099 per person</strong></p><p class="price-includes" style="color: #d4af37; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem;">Includes:</p>',
     list: [
       '8-hour intensive training',
       'Course materials & templates',

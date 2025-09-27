@@ -90,7 +90,7 @@ npm run dev
    - Investment Goals (optional)
 
 ### Step 3: Submit and Verify
-1. Click "Register Now - $497"
+1. Click "Register Now - RM1,099"
 2. Check for success notification
 3. Verify data in Supabase dashboard:
    - Go to **Table Editor**
