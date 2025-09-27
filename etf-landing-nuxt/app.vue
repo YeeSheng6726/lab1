@@ -42,7 +42,10 @@
         </div>
         <div class="hero-cta">
           <a href="#register" class="btn-primary" @click="scrollToSection('register')">Secure Your Spot - RM1,099</a>
-          <p class="guarantee">30-Day Money Back Guarantee</p>
+          <p class="hrdc-hero-badge">
+            <img src="/hrdc-badge.png" alt="HRDC Accredited Trainer" class="hrdc-badge-hero">
+            <span>HRDC Claimable</span>
+          </p>
         </div>
       </div>
     </section>
@@ -175,8 +178,9 @@
             <h3>{{ instructor.name }}</h3>
             <p class="instructor-title">{{ instructor.title }}</p>
             <div class="credentials">
-              <div v-for="credential in instructor.credentials" :key="credential.text" class="credential">
-                <i :class="credential.icon"></i>
+              <div v-for="credential in instructor.credentials" :key="credential.text" class="credential" :class="{ 'hrdc-credential': credential.isImage }">
+                <img v-if="credential.isImage" :src="credential.icon" :alt="credential.text" class="hrdc-badge">
+                <i v-else :class="credential.icon"></i>
                 <span>{{ credential.text }}</span>
               </div>
             </div>
@@ -463,8 +467,8 @@ const instructor = {
   title: 'Senior Portfolio Manager & ETF Specialist',
   credentials: [
     { icon: 'fas fa-award', text: '14+ Years Investment Experience' },
-    { icon: 'fas fa-university', text: 'MSc Polymer Engineering, Wharton School' },
-    { icon: 'fas fa-chart-line', text: '$500M+ Assets Under Management' }
+    { icon: 'fas fa-university', text: 'MSc Polymer Engineering, Queen\'s University of Belfast' },
+    { icon: '/hrdc-badge.png', text: 'HRDC Accredited Trainer', isImage: true }
   ],
   bio: "Choon Yee Sheng has spent over 14 years managing institutional portfolios and specializing in ETF strategies. He's helped thousands of investors build diversified, low-cost portfolios that outperform the market. His practical, no-nonsense approach makes complex investment concepts accessible to everyone."
 }
@@ -1616,6 +1620,44 @@ body {
     padding: 0;
     line-height: 1;
   }
+}
+
+/* HRDC Badge Styles */
+.hrdc-credential {
+  align-items: center;
+}
+
+.hrdc-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.5rem;
+}
+
+.hrdc-hero-badge {
+  font-size: 0.95rem;
+  color: var(--primary-gold);
+  text-align: center;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: rgba(212, 175, 55, 0.1);
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  backdrop-filter: blur(10px);
+  margin: 0 auto;
+  max-width: 250px;
+}
+
+.hrdc-badge-hero {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 /* Mobile responsive adjustments */
